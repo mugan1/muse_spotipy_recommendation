@@ -1,0 +1,67 @@
+{% extends 'search_result.html' %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<h1 style="text-align: center; margin-top: 50px;">{{session['firstname']}}'s Search Result</h1>
+<div class="container" style="margin-top: 50px;">
+    <br />
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+            <form action="/search_result" class="card card-sm" , method="post">
+                <div class="card-body row no-gutters align-items-center" style="background-color:rgba(0, 0, 0, 0.76);">
+                    <div class="col">
+                        <input class="form-control form-control-lg form-control-borderless" type="search"
+                            placeholder="Search artists or tracks" name='search'>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-lg btn-success" type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="margin-top: 50px;">
+  <form action="/playlist" method="post">
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-bordered" style="background-color: white; text-align: center;">
+        <thead>
+          <tr>
+            <th scope="col">Select</th>
+            <th scope="col">Track</th>
+            <th scope="col">Artist</th>
+            <th scope="col">Release</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for track in tracks %}
+          <tr>
+            <td>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="{{track[0]}}" name='tracks'
+                  value='{{track[0]}},{{track[1]}},{{track[2]}}'>
+                <label class="custom-control-label" for="{{track[0]}}"></label>
+              </div>
+            </td>
+            <td>{{track[0]}}</td>
+            <td>{{track[1]}}</td>
+            <td>{{track[2]}}</td>
+          </tr>
+
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="col-auto" style="margin-left: 880px; margin-top: 10px;">
+  <button class="btn btn-lg btn-success" type="submit">Save</button>
+  </form>
+</div>
+
+{% endblock %}

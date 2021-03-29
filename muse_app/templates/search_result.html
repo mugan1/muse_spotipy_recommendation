@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{super()}}
+{% endblock %}
+
+{% block content %}
+<h1 style="text-align: center; margin-top: 50px;">{{session['firstname']}}'s Search Result</h1>
+
+  <div class="container" style="margin-top: 20px;">
+    <form action="/playlist" method="post">
+    <div class="row" >
+      <div class="col-12">
+        <table class="table table-bordered" style="background-color: white; text-align: center;">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Genre</th>
+              <th scope="col">Popular</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for artist in artists %}
+            <td><a href='/search_result/{{ artist[0] }}'>{{artist[0]}}</a></td>
+            <td>{{artist[1]}}</td>
+            <td>{{artist[2]}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <table class="table table-bordered" style="background-color: white; text-align: center;">
+          <thead>
+            <tr>
+              <th scope="col">Select</th>
+              <th scope="col">Track</th>
+              <th scope="col">Artist</th>
+              <th scope="col">Release</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for track in tracks %}
+            <tr>
+              <td>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="{{track[0]}}" name='tracks'
+                    value='{{track[0]}},{{track[1]}},{{track[2]}}'>
+                  <label class="custom-control-label" for="{{track[0]}}"></label>
+                </div>
+              </td>
+              <td>{{track[0]}}</td>
+              <td>{{track[1]}}</td>
+              <td>{{track[2]}}</td>
+            </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-auto" style="margin-left: 880px; margin-top: 10px;"> 
+    <button class="btn btn-lg btn-success" type="submit">Save</button>
+  
+</form>
+</div>
+{% endblock %}

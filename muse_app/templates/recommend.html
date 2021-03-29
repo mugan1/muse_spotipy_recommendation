@@ -1,0 +1,78 @@
+{% extends 'playlist.html' %}
+
+{% block content %}
+<h1 style="text-align: center; margin-top: 50px;">{{session['firstname']}}'s Recommend List</h1>
+<form action="#" method="post">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <table class="table table-bordered" style="background-color: white; margin-top: 20px; text-align: center;">
+          <thead>
+            <tr>
+              <th scope="col">Track</th>
+              <th scope="col">Artist</th>
+              <th scope="col">Released</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for recommend in recommend_list.items %}
+            <td>{{recommend.track}}</td>
+            <td>{{recommend.artist}}</td>
+            <td>{{recommend.released}}</td>
+            <td>
+              <a class="btn btn-secondary" , href='/recommend/{{ recommend.id }}'>
+                Delete
+              </a>
+            </td>
+            </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</form>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    {% if recommend_list.has_prev %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ recommend_list.prev_num }}">Previous</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <a class="page-link" tabindex="-1" aria-disabled="true" href="#">Previous</a>
+    </li>
+    {% endif %}
+    {% for page_num in recommend_list.iter_pages() %}
+    {% if page_num %}
+    {% if page_num != recommend_list.page %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+    </li>
+    {% else %}
+    <li class="page-item active" aria-current="page">
+      <a class="page-link" href="#">{{ page_num }}</a>
+    </li>
+    {% endif %}
+    {% else %}
+    <li class="disabled">
+      <a class="page-link" href="#">...</a>
+    </li>
+    {% endif %}
+    {% endfor %}
+    <!-- 다음페이지 -->
+    {% if recommend_list.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ recommend_list.next_num }}">Next</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <a class="page-link" tabindex="-1" aria-disabled="true" href="#">Next</a>
+    </li>
+    {% endif %}
+  </ul>
+  </ul>
+</nav>
+{% endblock %}
