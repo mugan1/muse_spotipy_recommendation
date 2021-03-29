@@ -125,23 +125,29 @@ def recommend() :
     if not session.get('logged_in'):
         flash("로그인을 먼저 해주세요")
         return redirect(url_for('main.login'))
-    playlist = Playlist.query.filter(Playlist.user_id==session['id']).all()
+    playlist = Playlist.query.filter(Playlist.user_id==session['id']).first()
     if not playlist :
         flash("플레이리스트가 없습니다.")
         return render_template('search.html')
     else :
-        to_list = []
-        for p in playlist :
-            to_list.append({'name':p.track, 'year':int(p.released)})
-        recommend_list = spotipy.recommend_songs(to_list, get_data())
-        for r in recommend_list :
-            recommend = Recommend(track=r['name'], artist=r['artists'], released=r['year'], user_id=session['id'])
-            db.session.add(recommend)
-        db.session.commit()
-        page = request.args.get('page', 1, type=int)
-        recommend_list = Recommend.query.paginate(page=page, per_page=10)
-        return render_template("recommend.html", recommend_list=recommend_list, session=session)
-
+        is_rec = Recommend.query.filter(Recommend.user_id==session['id']).first()
+        if is_rec :
+            page = request.args.get('page', 1, type=int)
+            recommend_list = Recommend.query.paginate(page=page, per_page=10)
+            return render_template("recommend.html", recommend_list=recommend_list, session=session)
+        else :
+            to_list = []
+            for p in playlist :
+                to_list.append({'name':p.track, 'year':int(p.released)})
+            recommend_list = spotipy.recommend_songs(to_list, get_data())
+            for r in recommend_list :
+                recommend = Recommend(track=r['name'], artist=r['artists'], released=r['year'], user_id=session['id'])
+                db.session.add(recommend)
+            db.session.commit()
+            page = request.args.get('page', 1, type=int)
+            recommend_list = Recommend.query.paginate(page=page, per_page=10)
+            return render_template("recommend.html", recommend_list=recommend_list, session=session)
+      
 @bp.route('/recommend/<int:recommend_id>')
 def delete_recommend(recommend_id=None):
     if not session.get('logged_in'):
