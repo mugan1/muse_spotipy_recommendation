@@ -22,16 +22,16 @@ def create_app(config=None):
     app = Flask(__name__)
     app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
-   #  if app.config["ENV"] == 'production':
-   #     app.config.from_object('config.ProductionConfig')
-   #  else:
-   #     app.config.from_object('config.DevelopmentConfig')
+    if app.config["ENV"] == 'production':
+       app.config.from_object('config.ProductionConfig')
+    else:
+       app.config.from_object('config.DevelopmentConfig')
 
-   #  if config is not None:
-   #     app.config.update(config)
+    if config is not None:
+       app.config.update(config)
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    # app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+    # app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     db.init_app(app)
     migrate.init_app(app, db, render_as_batch=True)
