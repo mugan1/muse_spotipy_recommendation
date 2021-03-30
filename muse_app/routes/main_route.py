@@ -133,9 +133,10 @@ def recommend() :
         is_rec = Recommend.query.filter(Recommend.user_id==session['id']).first()
         if is_rec :
             page = request.args.get('page', 1, type=int)
-            recommend_list = Recommend.query.paginate(page=page, per_page=10)
+            recommend_list = Recommend.query.filter(Recommend.user_id==session['id']).paginate(page=page, per_page=10)
             return render_template("recommend.html", recommend_list=recommend_list, session=session)
         else :
+            playlist = Playlist.query.filter(Playlist.user_id==session['id']).all()
             to_list = []
             for p in playlist :
                 to_list.append({'name':p.track, 'year':int(p.released)})
@@ -145,7 +146,7 @@ def recommend() :
                 db.session.add(recommend)
             db.session.commit()
             page = request.args.get('page', 1, type=int)
-            recommend_list = Recommend.query.paginate(page=page, per_page=10)
+            recommend_list = Recommend.query.filter(Recommend.user_id==session['id']).paginate(page=page, per_page=10)
             return render_template("recommend.html", recommend_list=recommend_list, session=session)
       
 @bp.route('/recommend/<int:recommend_id>')
@@ -166,9 +167,9 @@ def feature():
         flash("로그인을 먼저 해주세요")
         return redirect(url_for('main.login'))
     else :
-        playlist = Playlist.query.all()
+        playlist = Playlist.query.filter(Playlist.user_id==session['id']).all()
         play_mean = spotipy.feature_dict(playlist)
-        recommend = Recommend.query.all()
+        recommend = Recommend.query.filter(Recommend.user_id==session['id']).all()
         reco_mean = spotipy.feature_dict(recommend)
 
         mean_dict = dict({'playlist' :play_mean, 'recommend':reco_mean})

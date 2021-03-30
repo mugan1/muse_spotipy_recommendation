@@ -7,38 +7,35 @@ $.getJSON("/data.json", data => {
     for (var key in data['recommend']) {
         recommend.push(data['recommend'][key])
     }
-    
-    var marksCanvas = document.getElementById("marksChart");
 
-    var marksData = {
+    var lineCanvas = document.getElementById("lineChart");
+
+    var lineData = {
         labels: ["acousticness", "danceability", "energy", "instrumentalness", "liveness", "loudness", "speechiness", "valence"],
         datasets: [{
             label: "Your List",
             fill: true,
             backgroundColor: "rgba(200,0,0,0.2)",
             data: playlist,
-            pointRadius: 4
         }, {
             label: "Recommended",
             fill: true,
             backgroundColor: "rgba(0,0,200,0.2)",
             data: recommend,
-            pointRadius: 4
         }]
     };
-  
-    var radarChart = new Chart(marksCanvas, {
-        type: 'radar',
+
+    var lineChart = new Chart(lineCanvas, {
+        type: 'line',
         title: {
             display: true,
-            text: 'Compare Radar Chart'
+            text: 'Compare Line Chart'
         },
-        data: marksData,
+        data: lineData,
         options: {
-        responsive: true,
+            responsive: true,
         }
     });
 
+
 });
-
-
