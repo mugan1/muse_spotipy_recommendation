@@ -25,13 +25,13 @@ def create_app(config=None):
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-    if app.config["ENV"] == 'production':
-       app.config.from_object('config.ProductionConfig')
-    else:
-       app.config.from_object('config.DevelopmentConfig')
+    # if app.config["ENV"] == 'production':
+    #    app.config.from_object('config.ProductionConfig')
+    # else:
+    #    app.config.from_object('config.DevelopmentConfig')
 
-    if config is not None:
-       app.config.update(config)
+    # if config is not None:
+    #    app.config.update(config)
 
  
 
