@@ -1,1 +1,1 @@
-web: gunicorn --workers=4 'muse_app:create_app()'
+web: gunicorn --workers=1 'muse_app:create_app()'
