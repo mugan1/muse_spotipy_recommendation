@@ -16,7 +16,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
 </head>
 
-<body style="background-color:white;">
+<body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
         <a class="navbar-brand" href="/">Welcome to MUSE</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -40,19 +40,19 @@
                 </li>
             </ul>
 
-            <a class="nav-link" href="/logout" style="float:right">Logout</a>
+            <a class="nav-link" href="/logout">Logout</a>
 
         </div>
     </nav>
-    <h1 style="text-align: center; margin-top: 50px;">{{session['firstname']}}'s Graph</h1>
-    <div class="container" style="margin-top: 150px; margin-left: 380px;">
+    <h1>{{session['firstname']}}'s Graph</h1>
+    <div class="container">
         <canvas id="marksChart" width="1000" height="1000"></canvas>
     </div>
-    <div class="container" style="margin-right: 590px; margin-top: 100px;">
+    <div class="container">
         <canvas id="lineChart" width="1500" height="700"></canvas>
     </div>
     <link rel="stylesheet" href="static/css/main.css?after">
     <script type="text/javascript" src="static/js/graph.js?ver=3"></script>
-    <script type="text/javascript" src="static/js/graph2.js?ver=2"></script>
+    <script type="text/javascript" src="static/js/graph2.js?ver=4"></script>
 </body>
 </html>

@@ -5,13 +5,13 @@
 {% endblock %}
 
 {% block content %}
-<h1 style="text-align: center; margin-top: 50px;">{{session['firstname']}}'s Search Result</h1>
-<div class="container" style="margin-top: 50px;">
+<h1>{{session['firstname']}}'s Search Result</h1>
+<div class="container">
     <br />
     <div class="row justify-content-center">
         <div class="col-12 col-md-10 col-lg-8">
             <form action="/search_result" class="card card-sm" , method="post">
-                <div class="card-body row no-gutters align-items-center" style="background-color:rgba(0, 0, 0, 0.76);">
+                <div class="card-body row no-gutters align-items-center">
                     <div class="col">
                         <input class="form-control form-control-lg form-control-borderless" type="search"
                             placeholder="Search artists or tracks" name='search'>
@@ -25,11 +25,11 @@
     </div>
 </div>
 
-<div class="container" style="margin-top: 50px;">
+<div class="container">
   <form action="/playlist" method="post">
   <div class="row">
     <div class="col-12">
-      <table class="table table-bordered" style="background-color: white; text-align: center;">
+      <table class="table table-bordered">
         <thead>
           <tr>
             <th scope="col">Select</th>
@@ -59,7 +59,7 @@
     </div>
   </div>
 </div>
-<div class="col-auto" style="margin-left: 880px; margin-top: 10px;">
+<div class="col-auto">
   <button class="btn btn-lg btn-success" type="submit">Save</button>
   </form>
 </div>

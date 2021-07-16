@@ -86,7 +86,6 @@ def get_mean_vector(song_list, spotify_data):
         song_vector = song_data[number_cols].values
         song_vectors.append(song_vector)  
     song_matrix = np.array(list(song_vectors))
-    print(np.mean(song_matrix, axis=0))
     return np.mean(song_matrix, axis=0)
 
 

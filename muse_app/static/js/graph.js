@@ -8,6 +8,7 @@ $.getJSON("/data.json", data => {
         recommend.push(data['recommend'][key])
     }
     
+    
     var marksCanvas = document.getElementById("marksChart");
 
     var marksData = {
