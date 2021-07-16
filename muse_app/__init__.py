@@ -18,17 +18,19 @@ def create_app(config=None):
     app = Flask(__name__)
     app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
-    #app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
-    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite+pysqlite:///dev_db_muse.sqlite3"
+    # heroku 배포 / development시 바꿔주기 
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
+    #app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite+pysqlite:///dev_db_muse.sqlite3"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-    if app.config["ENV"] == 'production':
-       app.config.from_object('config.ProductionConfig')
-    else:
-       app.config.from_object('config.DevelopmentConfig')
+   #  if app.config["ENV"] == 'production':
+   #     app.config.from_object('config.ProductionConfig')
+   #  else:
+   #     app.config.from_object('config.DevelopmentConfig')
 
-    if config is not None:
-       app.config.update(config)
+   #  if config is not None:
+   #     app.config.update(config)
 
     db.init_app(app)
     migrate.init_app(app, db)
