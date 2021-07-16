@@ -1,14 +1,15 @@
-{% extends 'search_result.html' %}
+{% extends 'search.html' %}
 
 {% block head %}
-{{ super() }}
+{{super()}}
 {% endblock %}
 
 {% block content %}
-<h1>{{session['firstname']}}'s Search Result</h1>
+<h1 id='title2' class='text-center'>{{session['firstname']}}'s Search Result</h1>
+
 <div class="container">
     <br />
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" id='bar'>
         <div class="col-12 col-md-10 col-lg-8">
             <form action="/search_result" class="card card-sm" , method="post">
                 <div class="card-body row no-gutters align-items-center">
@@ -29,7 +30,7 @@
   <form action="/playlist" method="post">
   <div class="row">
     <div class="col-12">
-      <table class="table table-bordered">
+      <table class="table table-bordered" id='table'>
         <thead>
           <tr>
             <th scope="col">Select</th>
@@ -42,7 +43,7 @@
           {% for track in tracks %}
           <tr>
             <td>
-              <div class="custom-control custom-checkbox">
+              <div class="custom-control custom-checkbox" id='checkbox'>
                 <input type="checkbox" class="custom-control-input" id="{{track[0]}}" name='tracks'
                   value='{{track[0]}},{{track[1]}},{{track[2]}}'>
                 <label class="custom-control-label" for="{{track[0]}}"></label>
@@ -59,7 +60,7 @@
     </div>
   </div>
 </div>
-<div class="col-auto">
+<div class="col-auto text-center">
   <button class="btn btn-lg btn-success" type="submit">Save</button>
   </form>
 </div>

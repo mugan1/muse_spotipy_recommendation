@@ -1,12 +1,12 @@
 {% extends 'playlist.html' %}
 
 {% block content %}
-<h1>{{session['firstname']}}'s Recommend List</h1>
-<form action="#" method="post">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <table class="table table-bordered">
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <h1 id='title' class='text-center'>{{session['firstname']}}'s Recommend List</h1>
+      <div id="second">
+        <table class="table table-bordered" id='table'>
           <thead>
             <tr>
               <th scope="col">Track</th>
@@ -33,16 +33,16 @@
       </div>
     </div>
   </div>
-</form>
+</div>
 <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
     {% if recommend_list.has_prev %}
     <li class="page-item">
-      <a class="page-link" href="?page={{ recommend_list.prev_num }}">Previous</a>
+      <a class="page-link" href="?page={{ recommend_list.prev_num }}">Pre</a>
     </li>
     {% else %}
     <li class="page-item disabled">
-      <a class="page-link" tabindex="-1" aria-disabled="true" href="#">Previous</a>
+      <a class="page-link" tabindex="-1" aria-disabled="true" href="#">Pre</a>
     </li>
     {% endif %}
     {% for page_num in recommend_list.iter_pages() %}
