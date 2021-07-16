@@ -1,67 +1,63 @@
-{% extends 'search.html' %}
-
-{% block head %}
-{{super()}}
-{% endblock %}
+{% extends 'base.html' %}
 
 {% block content %}
 <h1 id='title2' class='text-center'>{{session['firstname']}}'s Search Result</h1>
 
 <div class="container">
-    <br />
-    <div class="row justify-content-center" id='bar'>
-        <div class="col-12 col-md-10 col-lg-8">
-            <form action="/search_result" class="card card-sm" , method="post">
-                <div class="card-body row no-gutters align-items-center">
-                    <div class="col">
-                        <input class="form-control form-control-lg form-control-borderless" type="search"
-                            placeholder="Search artists or tracks" name='search'>
-                    </div>
-                    <div class="col-auto">
-                        <button class="btn btn-lg btn-success" type="submit">Search</button>
-                    </div>
-                </div>
-            </form>
+  <br />
+  <div class="row justify-content-center" id='bar'>
+    <div class="col-12 col-md-10 col-lg-8">
+      <form action="/search_result" class="card card-sm" , method="post">
+        <div class="card-body row no-gutters align-items-center">
+          <div class="col">
+            <input class="form-control form-control-lg form-control-borderless" type="search"
+              placeholder="Search artists or tracks" name='search'>
+          </div>
+          <div class="col-auto">
+            <button class="btn btn-lg btn-primary" type="submit">Search</button>
+          </div>
         </div>
+      </form>
     </div>
+  </div>
 </div>
 
 <div class="container">
   <form action="/playlist" method="post">
-  <div class="row">
-    <div class="col-12">
-      <table class="table table-bordered" id='table'>
-        <thead>
-          <tr>
-            <th scope="col">Select</th>
-            <th scope="col">Track</th>
-            <th scope="col">Artist</th>
-            <th scope="col">Release</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for track in tracks %}
-          <tr>
-            <td>
-              <div class="custom-control custom-checkbox" id='checkbox'>
-                <input type="checkbox" class="custom-control-input" id="{{track[0]}}" name='tracks'
-                  value='{{track[0]}},{{track[1]}},{{track[2]}}'>
-                <label class="custom-control-label" for="{{track[0]}}"></label>
-              </div>
-            </td>
-            <td>{{track[0]}}</td>
-            <td>{{track[1]}}</td>
-            <td>{{track[2]}}</td>
-          </tr>
+    <div class="row">
+      <div class="col-12">
+        <table class="table table-bordered" id='table'>
+          <thead>
+            <tr class="table-primary">
+              <th scope="col">Select</th>
+              <th scope="col">Track</th>
+              <th scope="col">Artist</th>
+              <th scope="col">Release</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for track in tracks %}
+            <tr>
+              <td>
+                <div class="custom-control custom-checkbox" id='checkbox'>
+                  <input type="checkbox" class="custom-control-input" id="{{track[0]}}" name='tracks'
+                    value='{{track[0]}},{{track[1]}},{{track[2]}}'>
+                  <label class="custom-control-label" for="{{track[0]}}"></label>
+                </div>
+              </td>
+              <td>{{track[0]}}</td>
+              <td>{{track[1]}}</td>
+              <td>{{track[2]}}</td>
+            </tr>
 
-          {% endfor %}
-        </tbody>
-      </table>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
 </div>
 <div class="col-auto text-center">
-  <button class="btn btn-lg btn-success" type="submit">Save</button>
+  <button class="btn btn-lg btn-primary" type="submit">Save</button>
   </form>
 </div>
 
