@@ -101,7 +101,7 @@ def flatten_dict_list(dict_list):
             
     return flattened_dict
 
-def recommend_songs( song_list, spotify_data, n_songs=100):
+def recommend_songs(song_list, spotify_data, n_songs=100):
 
     metadata_cols = ['name', 'year', 'artists']
     song_dict = flatten_dict_list(song_list)

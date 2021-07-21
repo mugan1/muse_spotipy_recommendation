@@ -8,7 +8,7 @@ import joblib
 
 data = pd.read_csv("muse_app/datas/data.csv")
 
-song_cluster_pipeline = Pipeline([('scaler', StandardScaler()), ('kmeans', KMeans(n_clusters=2))])
+song_cluster_pipeline = Pipeline([('scaler', StandardScaler()), ('kmeans', KMeans(n_clusters=10))])
 X = data.select_dtypes(np.number)
 number_cols = list(X.columns)
 song_cluster_pipeline.fit(X)
